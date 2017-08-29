@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "2be863ed966b85b0fc1c007386b7f7b4",
-    "content-hash": "93794dad0fdd7a1e54203fa605ac2b37",
+    "hash": "72f0f8248e111310dc81492b05b87064",
+    "content-hash": "026d94a4dee380d6aa5cf2090ee00483",
     "packages": [
         {
             "name": "composer/ca-bundle",
@@ -942,16 +942,16 @@
         },
         {
             "name": "jarrett/rockpaperscissorsspocklizard",
-            "version": "1.0.0",
+            "version": "1.1.2-stable",
             "source": {
                 "type": "git",
                 "url": "https://github.com/jarrettbarnett/RockPaperScissorsSpockLizard.git",
-                "reference": "df712d271409b70d43e589ef39434fd63bdcf42f"
+                "reference": "a3d7a440d8e240bb7c0240000f9e3b9bf1c722a0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/jarrettbarnett/RockPaperScissorsSpockLizard/zipball/df712d271409b70d43e589ef39434fd63bdcf42f",
-                "reference": "df712d271409b70d43e589ef39434fd63bdcf42f",
+                "url": "https://api.github.com/repos/jarrettbarnett/RockPaperScissorsSpockLizard/zipball/a3d7a440d8e240bb7c0240000f9e3b9bf1c722a0",
+                "reference": "a3d7a440d8e240bb7c0240000f9e3b9bf1c722a0",
                 "shasum": ""
             },
             "require-dev": {
@@ -973,7 +973,7 @@
                 }
             ],
             "description": "Based on a game created by Sam Kass and Karen Bryla and made popular by \"Big Bang Theory\"",
-            "time": "2017-08-29 16:49:57"
+            "time": "2017-08-29 19:00:32"
         },
         {
             "name": "jdorn/sql-formatter",
