@@ -94,7 +94,7 @@ class GameController extends Controller
 
         $latest_rounds = $doctrine
             ->getRepository(Round::class)
-            ->findAll();
+            ->findBy([], ['createdAt' => 'desc']);
 
         $view_data = [
             'pageTitle' => 'Rock-Paper-Scissors-Spock-Lizard!',
