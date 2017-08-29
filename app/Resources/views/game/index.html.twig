@@ -4,10 +4,50 @@
 
 {% block body %}
 
-    <h2 class="sub-header">{{ pageTitle }}</h2>
+    <div class="jumbotron">
+        <div class="col-lg-12">
+            {{ form_start(form) }}
+            {{ form_widget(form) }}
 
-    {{ form_start(form) }}
-    {{ form_widget(form) }}
-    {{ form_end(form) }}
+            <p class="lead">
+                <img src="/assets/images/rpssl.gif" />
+            </p>
+
+            {{ form_end(form) }}
+        </div>
+        <p class="lead">Scissors cuts Paper covers Rock crushes Lizard poisons Spock smashes Scissors decapitates Lizard eats Paper disproves Spock vaporizes Rock crushes Scissors.</p>
+    </div>
+
+    <div class="row marketing">
+        <div class="col-lg-12">
+            <h3 class="h3">Statistics</h3>
+
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>Your move</th>
+                    <th>Computer's move</th>
+                    <th>Outcome</th>
+                    <th>Details</th>
+                    <th>Time</th>
+                </tr>
+                </thead>
+                <tbody>
+                    {% for round in statistics %}
+                        <tr>
+                            <td>{{ round.move }}</td>
+                            <td>{{ round.opponentMove }}</td>
+                            <td>{{ round.outcome }}</td>
+                            <td>{{ round.outcomeDescription }}</td>
+                            <td>{{ round.createdAt|date("M jS @ g:ia") }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+
+
 
 {% endblock %}
