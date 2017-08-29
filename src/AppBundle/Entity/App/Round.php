@@ -38,9 +38,9 @@ class Round
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="datetime", type="datetimetz")
+     * @ORM\Column(name="created_at", type="datetimetz")
      */
-    private $datetime;
+    private $created_at;
 
     /**
      * @var string
@@ -56,6 +56,13 @@ class Round
      */
     private $outcomeDescription;
 
+    /**
+     * Round constructor.
+     */
+    public function __construct()
+    {
+        $this->setCreatedAt(new \DateTime());
+    }
 
     /**
      * Get id
@@ -118,13 +125,13 @@ class Round
     /**
      * Set datetime
      *
-     * @param \DateTime $datetime
+     * @param \DateTime $created_at
      *
      * @return Round
      */
-    public function setDatetime($datetime)
+    public function setCreatedAt($created_at)
     {
-        $this->datetime = $datetime;
+        $this->created_at = $created_at;
 
         return $this;
     }
@@ -134,9 +141,9 @@ class Round
      *
      * @return \DateTime
      */
-    public function getDatetime()
+    public function getCreatedAt()
     {
-        return $this->datetime;
+        return $this->created_at;
     }
 
     /**
