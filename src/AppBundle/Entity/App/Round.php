@@ -40,7 +40,7 @@ class Round
      *
      * @ORM\Column(name="created_at", type="datetimetz")
      */
-    private $created_at;
+    private $createdAt;
 
     /**
      * @var string
@@ -131,7 +131,7 @@ class Round
      */
     public function setCreatedAt($created_at)
     {
-        $this->created_at = $created_at;
+        $this->createdAt = $created_at;
 
         return $this;
     }
@@ -143,7 +143,7 @@ class Round
      */
     public function getCreatedAt()
     {
-        return $this->created_at;
+        return $this->createdAt;
     }
 
     /**
