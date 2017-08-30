@@ -1,4 +1,27 @@
-rpssl
+Symfony3 - Rock Paper Scissors Spock Lizard
 =====
 
-A Symfony project created on August 29, 2017, 4:52 pm.
+A Symfony3 implementation of "Rock Paper Scissors Spock Lizard".
+
+### Setup Instructions
+
+#### Create database and tables
+
+    $ cd rpssl;
+    $ php bin/console doctrine:database:create
+    $ php bin/console doctrine:schema:create
+    
+#### Install composer dependencies
+
+    $ composer install
+
+#### Install gulp and other node dependencies
+
+    $ cd rpssl;
+    $ npm install
+    
+##### Run gulp, watch occurs automatically
+
+    $ gulp
+    
+* Note: Pre-compiled assets are located in ./rpssl/app/Resources/assets/ and are compiled to ./rpssl/web/assets/
