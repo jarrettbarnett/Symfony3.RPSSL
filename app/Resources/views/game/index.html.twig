@@ -3,8 +3,8 @@
 {% block title %}{{ pageTitle }}{% endblock %}
 
 {% block notice %}
-    {% if notice is defined %}
-        <div class="alert alert-{{ notice_level }}" role="alert">
+    {% if notice is defined and notice is not empty %}
+        <div class="alert alert-{{ notice_severity }}" role="alert">
           {{ notice }}
         </div>
     {% endif %}
