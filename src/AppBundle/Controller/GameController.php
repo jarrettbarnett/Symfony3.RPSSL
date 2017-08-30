@@ -41,6 +41,8 @@ class GameController extends Controller
             ->getForm();
 
         $form->handleRequest($request);
+        $notice = '';
+        $notice_severity = 'primary';
 
         // handle player submission
         if ($form->isSubmitted() && $form->isValid()) {
@@ -86,7 +88,8 @@ class GameController extends Controller
                 }
 
             } catch (RockPaperScissorsSpockLizardException $e) {
-                // TODO display flash message
+                $notice = $e->getMessage();
+                $notice_severity = 'danger';
             }
 
             $doctrineManager->persist($data);
@@ -101,6 +104,8 @@ class GameController extends Controller
         $view_data = [
             'pageTitle' => 'Rock-Paper-Scissors-Spock-Lizard!',
             'form' => $form->createView(),
+            'notice' => $notice,
+            'notice_severity' => $notice_severity,
             'latest_results' => $latest_results,
             'outcome_totals' => $outcome_totals,
             'player_totals' => $player_totals,
