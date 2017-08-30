@@ -14,7 +14,7 @@
 
     <div class="row statistics">
         <div class="col-lg-4 col-md-4">
-            <div class="card text-white bg-success mb-3" style="max-width: 20rem;">
+            <div class="card text-white bg-success mb-3">
                 <div class="card-header text-center">Player Wins</div>
                     <div class="card-body">
                         <h4 class="card-title text-center">{{ outcome_totals.won }}</h4>
@@ -22,7 +22,7 @@
                 </div>
             </div>
         <div class="col-lg-4 col-md-4">
-            <div class="card text-white bg-danger mb-3" style="max-width: 20rem;">
+            <div class="card text-white bg-danger mb-3">
                 <div class="card-header text-center">Computer Wins</div>
                 <div class="card-body">
                     <h4 class="card-title text-center">{{ outcome_totals.lost }}</h4>
@@ -30,7 +30,7 @@
             </div>
         </div>
         <div class="col-lg-4 col-md-4">
-            <div class="card text-white bg-secondary mb-3" style="max-width: 20rem;">
+            <div class="card text-white bg-secondary mb-3">
                 <div class="card-header text-center">Ties</div>
                 <div class="card-body">
                     <h4 class="card-title text-center">{{ outcome_totals.tied }}</h4>
@@ -69,7 +69,7 @@
                 </div>
 
                 <p class="lead">
-                    <img src="/assets/images/rpssl.gif" />
+                    <img class="img-fluid" src="/assets/images/rpssl.gif" />
                 </p>
 
             {{ form_end(form) }}
@@ -78,11 +78,11 @@
     </div>
 
     <h3 class="h3 text-center mb-4">Player Moves Statistics</h3>
-    <div class="d-flex justify-content-around">
+    <div class="d-flex justify-content-around flex-wrap">
 
         {% for move, total in player_totals %}
-            <div class="col-lg-{{ move == 'scissors' ? '3' : '2' }} col-md-{{ move == 'scissors' ? '3' : '2' }}">
-                <div class="card text-white bg-primary mb-3" style="max-width: 20rem;">
+            <div class="col col-lg-{{ move == 'scissors' ? '3' : '2' }} col-md-{{ move == 'scissors' ? '3' : '2' }} col-sm-4 col-xs-2">
+                <div class="card text-white bg-primary mb-3">
                     <div class="card-header text-center">{{ move }}</div>
                     <div class="card-body">
                         <h4 class="card-title text-center">{{ total }}</h4>
@@ -93,11 +93,11 @@
     </div>
 
     <h3 class="h3 text-center mb-4">Computer Moves Statistics</h3>
-    <div class="d-flex justify-content-around">
+    <div class="d-flex justify-content-around flex-wrap">
 
         {% for move, total in computer_totals %}
-            <div class="col-lg-{{ move == 'scissors' ? '3' : '2' }} col-md-{{ move == 'scissors' ? '3' : '2' }}">
-                <div class="card text-white bg-secondary mb-3" style="max-width: 20rem;">
+            <div class="col col-lg-{{ move == 'scissors' ? '3' : '2' }} col-md-{{ move == 'scissors' ? '3' : '2' }} col-sm-4 col-xs-2">
+                <div class="card text-white bg-secondary mb-3">
                     <div class="card-header text-center">{{ move }}</div>
                     <div class="card-body">
                         <h4 class="card-title text-center">{{ total }}</h4>
