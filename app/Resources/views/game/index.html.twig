@@ -4,23 +4,104 @@
 
 {% block body %}
 
+    <div class="row statistics">
+        <div class="col-lg-4 col-md-4">
+            <div class="card text-white bg-success mb-3" style="max-width: 20rem;">
+                <div class="card-header text-center">Player Wins</div>
+                    <div class="card-body">
+                        <h4 class="card-title text-center">{{ outcome_totals.won }}</h4>
+                    </div>
+                </div>
+            </div>
+        <div class="col-lg-4 col-md-4">
+            <div class="card text-white bg-danger mb-3" style="max-width: 20rem;">
+                <div class="card-header text-center">Computer Wins</div>
+                <div class="card-body">
+                    <h4 class="card-title text-center">{{ outcome_totals.lost }}</h4>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4 col-md-4">
+            <div class="card text-white bg-secondary mb-3" style="max-width: 20rem;">
+                <div class="card-header text-center">Ties</div>
+                <div class="card-body">
+                    <h4 class="card-title text-center">{{ outcome_totals.tied }}</h4>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <div class="jumbotron">
+        {% if outcome_result is defined %}
+            <div class="col-lg-12 alert {{ outcome_result == 'won' ? 'alert-success' : outcome_result == 'tied' ? 'alert-warning' : 'alert-danger' }}">
+                <h3 class="h3">You {{ outcome_result ?: '' }}!</h3>
+                {% if outcome_description is defined %}
+                    <p class="h3">{{ outcome_description ?: '' }}</p>
+                {% endif %}
+            </div>
+        {% endif %}
+
         <div class="col-lg-12">
             {{ form_start(form) }}
-            {{ form_widget(form) }}
 
-            <p class="lead">
-                <img src="/assets/images/rpssl.gif" />
-            </p>
+                <div class="form-group">
+                    {{ form_label(form.move, null, {
+                        'label': 'Make A Move: ',
+                        'label_attr': {'class': 'display-4'}
+                    }) }}
+
+                    {{ form_widget(form.move, {'attr': {'class': 'display-4'}}) }}
+                </div>
+
+                <div class="form-group">
+                    {{ form_widget(form.submit, {
+                        'label': 'Submit Move!',
+                        'attr': {'class': 'btn btn-lg btn-primary'}
+                    }) }}
+                </div>
+
+                <p class="lead">
+                    <img src="/assets/images/rpssl.gif" />
+                </p>
 
             {{ form_end(form) }}
         </div>
         <p class="lead">Scissors cuts Paper covers Rock crushes Lizard poisons Spock smashes Scissors decapitates Lizard eats Paper disproves Spock vaporizes Rock crushes Scissors.</p>
     </div>
 
+    <h3 class="h3 text-center mb-4">Player Moves Statistics</h3>
+    <div class="d-flex justify-content-around">
+
+        {% for move, total in player_totals %}
+            <div class="col-lg-{{ move == 'scissors' ? '3' : '2' }} col-md-{{ move == 'scissors' ? '3' : '2' }}">
+                <div class="card text-white bg-primary mb-3" style="max-width: 20rem;">
+                    <div class="card-header text-center">{{ move }}</div>
+                    <div class="card-body">
+                        <h4 class="card-title text-center">{{ total }}</h4>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+
+    <h3 class="h3 text-center mb-4">Computer Moves Statistics</h3>
+    <div class="d-flex justify-content-around">
+
+        {% for move, total in computer_totals %}
+            <div class="col-lg-{{ move == 'scissors' ? '3' : '2' }} col-md-{{ move == 'scissors' ? '3' : '2' }}">
+                <div class="card text-white bg-secondary mb-3" style="max-width: 20rem;">
+                    <div class="card-header text-center">{{ move }}</div>
+                    <div class="card-body">
+                        <h4 class="card-title text-center">{{ total }}</h4>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+
     <div class="row marketing">
         <div class="col-lg-12">
-            <h3 class="h3">Statistics</h3>
+            <h3 class="h3">Last 10 Results</h3>
 
             <table class="table">
                 <thead>
@@ -33,11 +114,11 @@
                 </tr>
                 </thead>
                 <tbody>
-                    {% for round in statistics %}
+                    {% for round in latest_results %}
                         <tr>
                             <td>{{ round.move }}</td>
                             <td>{{ round.opponentMove }}</td>
-                            <td>{{ round.outcome }}</td>
+                            <td><span class="btn {{ round.outcome == 'won' ? 'btn-success' : round.outcome == 'tied' ? 'btn-secondary' : 'btn-danger' }}">{{ round.outcome }}</span></td>
                             <td>{{ round.outcomeDescription }}</td>
                             <td>{{ round.createdAt|date("M jS @ g:ia") }}</td>
                         </tr>
@@ -46,8 +127,5 @@
             </table>
         </div>
     </div>
-
-
-
 
 {% endblock %}

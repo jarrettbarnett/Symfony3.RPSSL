@@ -20,12 +20,15 @@ class GameController extends Controller
      */
     public function indexAction(Request $request)
     {
+        // Entity and Repository
         $round = new Round();
+        $doctrine = $this->getDoctrine();
+        $doctrineManager = $doctrine->getManager();
+        $roundRepository = $doctrineManager->getRepository('AppBundle:App\Round');
 
+        // setup form
         $form = $this->createFormBuilder($round)
             ->add('move', ChoiceType::class, [
-                'label' => 'Make A Move!',
-                'label_attr' => ['class' => 'display-3'],
                 'choices' => [
                     'Rock' => 'rock',
                     'Paper' => 'paper',
@@ -33,20 +36,13 @@ class GameController extends Controller
                     'Spock' => 'spock',
                     'Lizard' => 'lizard'
                 ],
-                'attr' => ['class' => 'display-4']
             ])
-            ->add('submit', SubmitType::class, [
-                'label' => 'Submit Move!',
-                'attr' => ['class' => 'btn btn-lg btn-success'],
-            ])
+            ->add('submit', SubmitType::class)
             ->getForm();
-
-        $doctrine = $this->getDoctrine();
-        $doctrineManager = $doctrine->getManager();
 
         $form->handleRequest($request);
 
-        // handle player move
+        // handle player submission
         if ($form->isSubmitted() && $form->isValid()) {
             $data = $form->getData();
 
@@ -74,12 +70,19 @@ class GameController extends Controller
                     $tie = $outcome['ties'][0];
                     $data->setOutcome('tied');
                     $data->setOutcomeDescription($tie['description']);
+    
+                    $outcome_result = 'tied';
+                    $outcome_description = $tie['description'];
 
                 } else {
-                    $player = $outcome['winners'][0]['player'];
+                    $winners = $outcome['winners'][0];
+                    $player = $winners['player'];
                     $result = $player->getName() === 'Human' ? 'won' : 'lost';
                     $data->setOutcome($result);
-                    $data->setOutcomeDescription($outcome['winners'][0]['description']);
+                    $data->setOutcomeDescription($winners['description']);
+                    
+                    $outcome_result = $result;
+                    $outcome_description = $winners['description'];
                 }
 
             } catch (RockPaperScissorsSpockLizardException $e) {
@@ -88,19 +91,27 @@ class GameController extends Controller
 
             $doctrineManager->persist($data);
             $doctrineManager->flush();
-
-            return $this->redirectToRoute('homepage');
         }
 
-        $latest_rounds = $doctrine
-            ->getRepository(Round::class)
-            ->findBy([], ['createdAt' => 'desc']);
+        $latest_results = $roundRepository->findBy([], ['createdAt' => 'desc'], 10);
+        $outcome_totals = $roundRepository->getOutcomeTotals();
+        $player_totals = $roundRepository->getPlayerMovesTotals();
+        $computer_totals = $roundRepository->getComputerMovesTotals();
 
         $view_data = [
             'pageTitle' => 'Rock-Paper-Scissors-Spock-Lizard!',
             'form' => $form->createView(),
-            'statistics' => $latest_rounds
+            'latest_results' => $latest_results,
+            'outcome_totals' => $outcome_totals,
+            'player_totals' => $player_totals,
+            'computer_totals' => $computer_totals
         ];
+        
+        if (!empty($outcome_result))
+        {
+            $view_data['outcome_result'] = $outcome_result;
+            $view_data['outcome_description'] = str_replace('Both', 'You both', $outcome_description);
+        }
 
         return $this->render('game/index.html.twig', $view_data);
     }
