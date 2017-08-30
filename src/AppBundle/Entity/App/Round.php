@@ -1,5 +1,4 @@
 <?php
-
 namespace AppBundle\Entity\App;
 
 use Doctrine\ORM\Mapping as ORM;
