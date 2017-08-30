@@ -24,4 +24,4 @@ A Symfony3 implementation of "Rock Paper Scissors Spock Lizard".
 
     $ gulp
     
-* Note: Pre-compiled assets are located in ./rpssl/app/Resources/assets/ and are compiled to ./rpssl/web/assets/
+* Note: Pre-compiled assets are located in ./app/Resources/assets/ and are compiled to ./web/assets/
