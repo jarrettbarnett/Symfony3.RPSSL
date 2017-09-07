@@ -19,7 +19,7 @@ class GameController extends Controller
      */
     public function indexAction(Request $request)
     {
-        $view_data['pageTitle'] = 'Rock-Paper-Scissors-Spock-Lizard!';
+        $pageTitle = 'Rock-Paper-Scissors-Spock-Lizard!';
 
         // Entity and Repository
         $round = new Round();
@@ -44,11 +44,6 @@ class GameController extends Controller
         $form->handleRequest($request);
         $notice = '';
         $notice_severity = 'primary';
-
-        if (!$form->isSubmitted()) {
-            $view_data['form'] = $form;
-            return $this->render('game/index.html.twig', $view_data);
-        }
 
         // handle player submission
         if ($form->isSubmitted() && $form->isValid()) {
@@ -117,7 +112,7 @@ class GameController extends Controller
         $computer_totals = $roundRepository->getComputerMovesTotals();
 
         $view_data = [
-            'pageTitle' => $view_data['pageTitle'],
+            'pageTitle' => $pageTitle,
             'form' => $form->createView(),
             'notice' => $notice,
             'notice_severity' => $notice_severity,
