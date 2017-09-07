@@ -16,7 +16,6 @@ A Symfony3 implementation of "Rock Paper Scissors Spock Lizard".
 
 #### Install gulp and other node dependencies
 
-    $ cd rpssl;
     $ npm install
     
 ##### Run gulp, watch occurs automatically
