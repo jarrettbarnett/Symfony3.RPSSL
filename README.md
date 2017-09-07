@@ -7,7 +7,6 @@ A Symfony3 implementation of "Rock Paper Scissors Spock Lizard".
 
 #### Create database and tables
 
-    $ cd rpssl;
     $ php bin/console doctrine:database:create
     $ php bin/console doctrine:schema:create
     
