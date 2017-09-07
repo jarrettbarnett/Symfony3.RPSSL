@@ -73,7 +73,7 @@ monolog:
     handlers:
         applog:
             type: stream
-            path: /var/log/symfony.log
+            path: ../var/logs/exceptions.log
             level: error
         main:
             type: fingers_crossed
