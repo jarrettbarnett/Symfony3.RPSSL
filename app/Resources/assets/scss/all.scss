@@ -22,6 +22,7 @@ body {
   margin-top: 0;
   margin-bottom: 0;
   line-height: 3rem;
+  margin-right: 2rem !important;
 }
 
 /* Custom page footer */
@@ -34,7 +35,7 @@ body {
 /* Customize container */
 @media (min-width: 48em) {
   .container {
-    max-width: 46rem;
+    max-width: 56rem;
   }
 }
 .container-narrow > hr {
@@ -80,4 +81,11 @@ body {
   .jumbotron {
     border-bottom: 0;
   }
+}
+
+.nav-link {
+  padding: 8px 12px;
+}
+.nav-link.active {
+  margin-right: 5px;
 }
