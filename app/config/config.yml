@@ -67,3 +67,21 @@ swiftmailer:
     username: '%mailer_user%'
     password: '%mailer_password%'
     spool: { type: memory }
+
+# Log configuration
+monolog:
+    handlers:
+        applog:
+            type: stream
+            path: /var/log/symfony.log
+            level: error
+        main:
+            type: fingers_crossed
+            action_level: warning
+            handler: file
+        file:
+            type: stream
+            level: debug
+        syslog:
+            type: syslog
+            level: error

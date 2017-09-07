@@ -87,8 +87,17 @@ class GameController extends Controller
                 }
 
             } catch (RockPaperScissorsSpockLizardException $e) {
+                // catch game error so we can send it to the view
                 $notice = $e->getMessage();
                 $notice_severity = 'danger';
+            } catch (Exception $e) {
+                // catch unknown error, log it, dont send it to the view
+                $notice = 'What did you do? The game is broken...';
+                $notice_severity = 'danger';
+
+                // log the error to the application log
+                $logger = $this->get('logger');
+                $logger->err($e->getMessage());
             }
 
             $doctrineManager->persist($data);
