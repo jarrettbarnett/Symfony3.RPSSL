@@ -90,7 +90,7 @@ class GameController extends Controller
                 // catch game error so we can send it to the view
                 $notice = $e->getMessage();
                 $notice_severity = 'danger';
-            } catch (Exception $e) {
+            } catch (\Exception $e) {
                 // catch unknown error, log it, dont send it to the view
                 $notice = 'What did you do? The game is broken...';
                 $notice_severity = 'danger';
