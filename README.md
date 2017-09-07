@@ -1,7 +1,9 @@
 Symfony3 - Rock Paper Scissors Spock Lizard
 =====
 
-A Symfony3 implementation of "Rock Paper Scissors Spock Lizard".
+A basic Symfony3 implementation of "Rock Paper Scissors Spock Lizard".
+
+**[Play It Here: http://fasstt.com](http://fasstt.com/)**
 
 ### Setup Instructions
 
@@ -18,7 +20,7 @@ A Symfony3 implementation of "Rock Paper Scissors Spock Lizard".
 
     $ npm install
     
-##### Run gulp, watch occurs automatically
+##### Run gulp, gulp-watch occurs automatically
 
     $ gulp
     
